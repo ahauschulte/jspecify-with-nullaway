@@ -32,7 +32,7 @@ robust mechanism for eliminating null-related bugs.
 ## JVM Configuration
 
 This project includes a `jvm.config` file located in the `.mvn` directory. This file is crucial for enabling the
-necessary JVM options that allow `Error Prone` and `NullAway` to function correctly with the Java compiler by
+necessary JVM options that allow Error Prone and NullAway to function correctly with the Java compiler by
 ensuring compatibility with internal APIs of the compiler.
 
 These options ensure that internal APIs of the Java compiler are accessible to Error Prone and NullAway. Without these
