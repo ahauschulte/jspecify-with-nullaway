@@ -58,26 +58,43 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>com.google.errorprone</groupId>
-                            <artifactId>error_prone_core</artifactId>
-                            <version>2.30.0</version>
-                        </path>
-                        <path>
-                            <groupId>com.uber.nullaway</groupId>
-                            <artifactId>nullaway</artifactId>
-                            <version>0.11.1</version>
-                        </path>
-                    </annotationProcessorPaths>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
-                        <arg>-XDcompilePolicy=simple</arg>
-                        <arg>-Xplugin:ErrorProne -XepDisableAllChecks -XepOpt:NullAway:JSpecifyMode -Xep:NullAway:WARN -XepOpt:NullAway:AnnotatedPackages=com.github.ahauschulte</arg>
                     </compilerArgs>
                 </configuration>
+                <executions>
+                    <execution>
+
+                        <!-- Apply NullAway checks only to production code but not to test code
+                             (see also https://github.com/uber/NullAway/issues/162) -->
+                        <id>default-compile</id>
+                        <configuration>
+                            <annotationProcessorPaths>
+                                <path>
+                                    <groupId>com.google.errorprone</groupId>
+                                    <artifactId>error_prone_core</artifactId>
+                                    <version>2.30.0</version>
+                                </path>
+                                <path>
+                                    <groupId>com.uber.nullaway</groupId>
+                                    <artifactId>nullaway</artifactId>
+                                    <version>0.11.1</version>
+                                </path>
+                            </annotationProcessorPaths>
+                            <compilerArgs>
+                                <arg>-XDcompilePolicy=simple</arg>
+                                <arg>-Xplugin:ErrorProne
+                                    -XepDisableAllChecks
+                                    -XepOpt:NullAway:JSpecifyMode
+                                    -Xep:NullAway:WARN
+                                    -XepOpt:NullAway:AnnotatedPackages=com.github.ahauschulte
+                                </arg>
+                            </compilerArgs>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
