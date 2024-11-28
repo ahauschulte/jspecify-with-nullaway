@@ -85,6 +85,7 @@
                             </annotationProcessorPaths>
                             <compilerArgs>
                                 <arg>-XDcompilePolicy=simple</arg>
+                                <arg>--should-stop=ifError=FLOW</arg>
                                 <arg>-Xplugin:ErrorProne
                                     -XepDisableAllChecks
                                     -XepOpt:NullAway:JSpecifyMode
